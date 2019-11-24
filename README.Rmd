@@ -255,9 +255,8 @@ heatmap(3)
 
 A következőkben megnézzük, hogy a hálózat hogyan reagál különböző paraméterezésekre, és ezek milyen érdekességeket fognak eredményezni.
 
-Az alábbi paraméterekkel éves ablakméretre és késleltetés nélkül nézzük meg a hálózatot 2011.01.30-tól kezdődően:
+Az alábbi paraméterekkel éves ablakméretre és késleltetés nélkül nézzük meg a hálózatot 2011.01.20-tól kezdődően:
 ```{r}
-return_maker()
 add_parameters("2011-01-30",0,360)
 check_parameters()
 calculate_correlation()
@@ -268,7 +267,7 @@ Minimum, maximum és átlag korreláció ettől a naptól nézve 2016.12.31-ig (
 plot_mmm()
 ```
 A ploton jól látszik a 0 késleltetés következménye: az egymáshoz közeli lejáratú szerződések árai között közel 1-es korreláció figyelhető meg, emiatt a maximum végig 1.
-Emellett az egymástól távolabb lejárattal rendelkezőek között kisebb a korreláció, de még a minimum sem éri el soha a 0,5-ös értéket. Azaz végig legalább közepesen erős, de többnyire erős korreláció jellemző.
+Emellett a minimum 2014 és 2015 között a legkisebb, de még így sem éri el soha a 0,5-ös korrelációt, azaz végig legalább közepesen erős maradt. Egyébként, ahogy azt majd később látni fogjuk, a korreláció gyengülése a rövid lejáratú, CL1-CL6 eszközökhöz köthető.
 
 Az alábbi ábrán a pontok egymástól való távolsága, a kapcsolatok színe és vastagsága jelzi a korreláció erősségét.
 Ahogy a plotból is látszik, az első pár évben nagyon erős a korreláció:
@@ -282,12 +281,14 @@ Az élénk píros hőtérkép is ezt igazolja:
 heatmap(300)
 ```
 
-2014 és 2015 gyengébb a kapcsolat, amit jelez a pontok nagyobb távolsága is, de a kapcsolat még mindig közepesen erős (szín):
+2014 és 2015 gyengébb a kapcsolat, de amint látjuk, ezt csak az 1-6 hónapos lejáratú szerződések okozzák, amelyekből 1-3 lejáratúak egy-egy önálló klasztert, illetve 4-6 egy együttes klasztert alakítanak.
 ```{r}
 graph_plot(1000)
 ```
+Ez érdekes megfigyelés, hiszen azt várjuk, hogy az egymáshoz közel közel levő, ráadásul rövid lejáratú szerződések korrelációja nagyon magas, ha nem a legmagasabb lesz.
 
 Az itt-ott "gyengülő korreláció" a hőtérképen is látható a világosabb cellák alakjában, de ez még mindig jóval meghaladja a 0-t:
 
 ```{r}
 heatmap(1000)
+```
